@@ -1,0 +1,49 @@
+<h1>My Goals</h1>
+<ul>
+    <div *ngFor='let goal of goals;let i = index'>
+
+            <li  id="{{i}}" appStrikethrough>{{goal.name}} due on {{goal.completeDate|date|uppercase}}</li>
+        <li appStrikethrough>{{goal.name}}</li>
+        <button  (click)='toogleDetails(i)'>Toogle Details</button>
+
+    <app-goal-details *ngIf="goal.showDescription" [goal]='goal' (isComplete)= 'completeGoal($event,i)'></app-goal-details>
+    <app-goal-details *ngIf="goal.showDescription" [goal]='goal' (isComplete)= 'deleteGoal($event,i)'></app-goal-details>
+    
+    </div>
+</ul>
+<p *ngIf='goals.length > 5'>You have too many goals</p> 
+
+
+
+<h3>My Goals</h3>
+<hr>
+<div class="container">
+    <div class="row" *ngFor="let goal of goals;let i = 'index'">
+        <div class="row">
+            <h4 id="{{i}}" appStrikethrough>{{goal.name}} due on {{goal.completeDate|date|uppercase}}</h4>
+            <button class="btn btn-primary" (click)='toogleDetails(i)'>Toogle Details</button>
+        </div>
+        
+        <div class="row" *ngIf="goal.showDescription">
+        <app-goal-details  [goal]='goal' (isComplete)= 'deleteGoal($event,i)'></app-goal-details>
+    </div>
+    
+</div>
+
+</div>
+
+<div class="container">
+        <div class="row">
+            <app-goal-form></app-goal-form>
+        </div>
+    </div>
+    
+    <div class="row">
+            <app-goal-form (addGoal)="addNewGoal($event)"></app-goal-form>
+        </div>
+
+
+      
+
+<p *ngIf='goals.length > 5'>You have too many goals</p>
+
